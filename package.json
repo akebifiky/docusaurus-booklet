@@ -1,0 +1,40 @@
+{
+  "name": "docusaurus-booklet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf lib/**/*",
+    "transpile": "tsc",
+    "build": "npm-run-all clean transpile",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint --fix src/**/*.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.2",
+    "@types/deepmerge": "^2.2.0",
+    "@types/node": "^16.11.11",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/parser": "^5.5.0",
+    "eslint": "^8.3.0",
+    "eslint-config-prettier": "^8.3.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.5.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "cli-spinners": "^2.6.1",
+    "commander": "^8.3.0",
+    "cosmiconfig": "^7.0.1",
+    "deepmerge": "^4.2.2",
+    "log-update": "^5.0.0",
+    "nanoid": "^3.1.30",
+    "puppeteer": "^12.0.1"
+  }
+}
