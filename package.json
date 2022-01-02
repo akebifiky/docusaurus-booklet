@@ -1,6 +1,6 @@
 {
   "name": "docusaurus-booklet",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Docusaurus plugin to generate PDF from docs.",
   "homepage": "https://github.com/akebifiky/docusaurus-booklet#readme",
   "repository": {
