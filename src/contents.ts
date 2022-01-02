@@ -134,14 +134,15 @@ function merge(destination: SidebarContent, source: SidebarContent): SidebarCont
  * @param options The cover options
  * @returns cover page content
  */
-export function generateCoverPageContent({ title, subtitle, backgroundImage }: CoverOptions): PageContent {
+export function generateCoverPageContent({ title, subtitle, version, backgroundImage }: CoverOptions): PageContent {
   const styleAttribute = backgroundImage ? ` style="background-image:url('${encodeImage(backgroundImage)}')"` : "";
   return {
     html: `
       <div class="${PAGE_CLASS}"${styleAttribute}>
-        <div class="content">
+        <div class="docusaurus-booklet-cover-content">
           <h1 class="title">${title}</h1>
           ${subtitle ? '<h2 class="subtitle">' + subtitle + "</h2>" : ""}
+          ${version ? '<h3 class="version">' + process.env.npm_package_version + "</h3>" : ""}
         </div>
       </div>
     `,

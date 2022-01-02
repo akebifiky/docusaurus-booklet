@@ -91,7 +91,7 @@ test("to generate cover page content", () => {
   const content = generateCoverPageContent({ title: "Dummy Title" });
   const expectedHTML = formatted(`
     <div class="docusaurus-booklet-page">
-      <div class="content">
+      <div class="docusaurus-booklet-cover-content">
         <h1 class="title">Dummy Title</h1>
       </div>
     </div>
@@ -105,7 +105,7 @@ test("to generate cover page content with subtitle", () => {
   const content = generateCoverPageContent({ title: "Dummy Title", subtitle: "Dummy Subtitle" });
   const expectedHTML = formatted(`
     <div class="docusaurus-booklet-page">
-      <div class="content">
+      <div class="docusaurus-booklet-cover-content">
         <h1 class="title">Dummy Title</h1>
         <h2 class="subtitle">Dummy Subtitle</h2>
       </div>
@@ -126,9 +126,26 @@ test("to generate cover page content with background image", () => {
   const expectedBase64EncodedImage = fs.readFileSync(path.join(__dirname, "resources/cover.svg")).toString("base64");
   const expectedHTML = formatted(`
     <div class="docusaurus-booklet-page" style="background-image:url('data:image/svg+xml;base64,${expectedBase64EncodedImage}')">
-      <div class="content">
+      <div class="docusaurus-booklet-cover-content">
         <h1 class="title">Dummy Title</h1>
         <h2 class="subtitle">Dummy Subtitle</h2>
+      </div>
+    </div>
+  `);
+
+  expect(content.path).toBe("cover");
+  expect(formatted(content.html)).toBe(expectedHTML);
+});
+
+test("to generate cover page content with version label", () => {
+  process.env.npm_package_version = "1.2.3";
+  const content = generateCoverPageContent({ title: "Dummy Title", subtitle: "Dummy Subtitle", version: true });
+  const expectedHTML = formatted(`
+    <div class="docusaurus-booklet-page">
+      <div class="docusaurus-booklet-cover-content">
+        <h1 class="title">Dummy Title</h1>
+        <h2 class="subtitle">Dummy Subtitle</h2>
+        <h3 class="version">1.2.3</h3>
       </div>
     </div>
   `);

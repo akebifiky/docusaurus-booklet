@@ -39,6 +39,17 @@
   margin-bottom: calc(var(--ifm-leading) * 0.5);
 }
 
+#cover .version {
+  font-size: 1.5rem;
+  margin-top: calc(var(--ifm-leading) * 2);
+}
+
+#cover .version::before {
+  content: "Ver.";
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
 .docusaurus-booklet-category-title,
 #table-of-contents h1 {
   font-size: 3rem;

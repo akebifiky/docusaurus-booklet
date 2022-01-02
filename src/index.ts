@@ -23,6 +23,7 @@ const defaultCSS = path.resolve(__dirname, "../assets/default.css");
 const defaultConfig: BookletPluginOptions = {
   cover: {
     title: process.env.npm_package_name || "Docusaurus Booklet",
+    version: true,
   },
   toc: {
     title: "Table of Contents",

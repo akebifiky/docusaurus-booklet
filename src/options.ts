@@ -66,6 +66,9 @@ export type CoverOptions = {
   /** Subtitle */
   subtitle?: string;
 
+  /** Show/Hide version */
+  version?: boolean;
+
   /** Background image path */
   backgroundImage?: string;
 
