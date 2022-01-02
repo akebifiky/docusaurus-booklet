@@ -1,19 +1,33 @@
 {
   "name": "docusaurus-booklet",
   "version": "0.1.0",
-  "description": "",
+  "description": "Docusaurus plugin to generate PDF from docs.",
+  "homepage": "https://github.com/akebifiky/docusaurus-booklet#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akebifiky/docusaurus-booklet"
+  },
+  "type": "commonjs",
   "main": "dist/index.js",
-  "bin": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "assets"
+  ],
   "scripts": {
     "clean": "rimraf dist/**/*",
     "build": "tsc",
+    "test": "jest",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint --fix src/**/*.ts",
-    "test": "jest"
+    "prepublishOnly": "npm-run-all clean build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "docusaurus",
+    "pdf"
+  ],
+  "author": "akebifiky",
+  "license": "MIT",
   "devDependencies": {
     "@docusaurus/types": "^2.0.0-beta.14",
     "@tsconfig/node16": "^1.0.2",

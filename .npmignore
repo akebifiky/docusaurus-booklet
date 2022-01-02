@@ -1,0 +1,8 @@
+src
+.vscode
+.eslintignore
+.eslintrc.json
+.giattributes
+.prettierrc.json
+jest.config.json
+tsconfig.json
