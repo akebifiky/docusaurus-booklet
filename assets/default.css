@@ -1,0 +1,64 @@
+.docusaurus-booklet-page {
+  padding: 0 calc(var(--ifm-spacing-horizontal) * 0.5);
+  page-break-after: always;
+}
+
+#cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#cover .title {
+  font-size: 3rem;
+  font-weight: var(--ifm-heading-font-weight);
+  margin-bottom: 0;
+}
+
+#cover .subtitle {
+  font-size: 2rem;
+  font-weight: var(--ifm-heading-font-weight);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#cover .subtitle::before {
+  content: "";
+  display: block;
+  border-top: 1px solid var(--ifm-color-gray-500);
+  width: 85%;
+  margin-top: calc(var(--ifm-leading) * 0.5);
+  margin-bottom: calc(var(--ifm-leading) * 0.5);
+}
+
+.docusaurus-booklet-category-title,
+#table-of-contents h1 {
+  font-size: 3rem;
+  font-weight: var(--ifm-heading-font-weight);
+  line-height: var(--ifm-heading-line-height);
+  margin-top: var(--ifm-heading-margin-top);
+}
+
+.docusaurus-booklet-category-title {
+  margin-bottom: calc(var(--ifm-leading) * 2);
+}
+
+#table-of-contents h1 {
+  margin-bottom: calc(var(--ifm-leading) * 1.25);
+}
+
+.docusaurus-booklet-section-number {
+  margin-right: 0.5rem;
+}
+
+.docusaurus-booklet-toc.autonumbered .docusaurus-booklet-toc-list {
+  list-style-type: none;
+}
