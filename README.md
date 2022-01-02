@@ -1,6 +1,16 @@
 # docusaurus-booklet
 
+![Docusaurus Booklet](documents/sample-pages.png)
+
 `docusaurus-booklet` is a [Docusaurus](https://docusaurus.io/) plugin to generate PDF from docs.
+
+<ul style="list-style-type: '✔️ '">
+  <li>Generating cover page (Title / Subtitle / Background)</li>
+  <li>Generateing table of contents from sidebar</li>
+  <li>Auto section numbering</li>
+</ul>
+
+
 
 ## 🚀 Quickstart
 
@@ -64,6 +74,235 @@ to output `docusaurus-booklet.pdf`. (See [CLI options](#cli-options) to change o
 
 
 
+## 🎨 Styling
+
+### Cover Page
+
+Cover page contents can be edited with the option `cover`,
+and you can styling cover page with selector `#cover` in your custom CSS.
+
+```javascript
+module.exports = {
+  // ... your config
+  plugins: [
+    [
+      "docusaurus-booklet",
+      {
+        cover: {
+          title: "Docusaurus Booklet",
+          subtitle: "Generate PDF from Docusaurus docs",
+          backgroundImage: "static/img/cover.svg",
+          margin: {
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+          },
+        }
+      }
+    ]
+  ]
+}
+```
+
+```css
+/* custom.css */
+#cover {
+  color: #fff;
+}
+```
+
+will output:
+
+<img src="documents/sample-cover.png" width="auto" height="500px" />
+
+### Header
+
+Header can be specified with option `header` like following:
+
+```javascript
+module.exports = {
+  // ... your config
+  plugins: [
+    [
+      "docusaurus-booklet",
+      {
+        cover: {
+          title: "Docusaurus Booklet",
+        },
+      	header: {
+          text: "Sample Header",
+          version: true, // => shows 'version' in 'package.json'
+          style: "color: #dcdcdc; font-size: 9px;"
+      	}
+      }
+    ]
+  ]
+}
+```
+
+output:
+
+![Sample Header](documents/sample-header.png)
+
+#### Full-customized header
+
+You can also use HTML snippet to specify custom header.
+
+```javascript
+module.exports = {
+  // ... your config
+  plugins: [
+    [
+      "docusaurus-booklet",
+      {
+        cover: {
+          title: "Docusaurus Booklet",
+        },
+      	header: {
+          html: `
+            <style>
+              .your-custom-header {
+                width: 100%;
+                text-align: center;
+                color: #dcdcdc;
+                font-size: 8px;
+                font-family: system-ui;
+              }
+            </style>
+          	<div class="your-custom-header">
+          	  You can write anything!
+          	</div>
+          `
+      	}
+      }
+    ]
+  ]
+}
+```
+
+will output:
+
+![Sample Full-customized Header](documents/sample-full-customized-header.png)
+
+### Footer
+
+Footer can be specified with option `footer` same way as the option `header`:
+
+```javascript
+module.exports = {
+  // ... your config
+  plugins: [
+    [
+      "docusaurus-booklet",
+      {
+        cover: {
+          title: "Docusaurus Booklet",
+        },
+      	footer: {
+          text: "Sample Footer",
+          pageNumber: true,
+          style: "color: #dcdcdc; font-size: 9px; border-top: 1px solid #dcdcdc",
+      	}
+      }
+    ]
+  ]
+}
+```
+
+will output:
+
+![Sample Footer](documents/sample-footer.png)
+
+#### Page number placeholder
+
+The option `footer.pageNumber` can be a function that handling the placeholders:
+
+```javascript
+module.exports = {
+  // ... your config
+  plugins: [
+    [
+      "docusaurus-booklet",
+      {
+        cover: {
+          title: "Docusaurus Booklet",
+        },
+      	footer: {
+          text: "Sample Footer",
+          pageNumber: (pageNumber, totalPages) => `${pageNumber} of ${totalPages}`,
+          style: "color: #dcdcdc; font-size: 9px; border-top: 1px solid #dcdcdc",
+      	}
+      }
+    ]
+  ]
+}
+```
+
+will output:
+
+![Sample Footer with page number placeholder](documents/sample-footer-with-page-number-generator.png)
+
+#### Full-customized footer
+
+Footer option can also be a HTML snippet same as header.
+
+```javascript
+module.exports = {
+  // ... your config
+  plugins: [
+    [
+      "docusaurus-booklet",
+      {
+        cover: {
+          title: "Docusaurus Booklet",
+        },
+      	footer: {
+          html: `
+            <style>
+             .document-footer {
+               width: 100%;
+               text-align: center;
+               color: #dcdcdc;
+               font-size: 8px;
+               font-family: system-ui;
+             }
+            </style>
+            <div class="document-footer">
+              <div>You can specify anything!</div>
+              <div>
+                <span class="pageNumber"></span> / <span class="totalPages"></span>
+              </div>
+            </div>
+          `
+      	}
+      }
+    ]
+  ]
+}
+```
+
+will output:
+
+![Sample Full-customized Footer](documents/sample-full-customized-footer.png)
+
+#### Header/Footer template limitations
+
+Header/Footer can be specified arbitrary HTML snippet, but they have following limitations in its evaluation:
+
+> 1. Script tags inside templates are not evaluated.
+> 2. Page styles are not visible inside templates.
+
+See details about limitations: [Puppeteer API](https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#pagepdfoptions)
+
+### Custom CSS
+
+You can specify your custom CSS with the option `css`.
+
+This option replace default CSS, so please see [default CSS](https://github.com/akebifiky/docusaurus-booklet/blob/main/assets/default.css) before using.
+
+
+
 ## 🛠️ Configuration
 
 ### CLI Options
@@ -107,7 +346,7 @@ type BookletPluginOptions = {
    * TOC (Table of Contents) options,
    * or set 'false' to disable TOC page
    */
-  toc?: TableOfContentsOptions | false;
+  toc?: { title: string } | false;
 
   /** 
    * PDF format (same as puppeteer option)
@@ -198,6 +437,8 @@ export type HTMLFragmentOption = {
 
 ### Default Plugin Options
 
+Following options are used in default:
+
 ```javascript
 const defaultPluginOptions = {
   cover: {
@@ -213,7 +454,6 @@ const defaultPluginOptions = {
     bottom: "0.7in",
     left: "0.4in",
   },
-  css: defaultCSS,
   autonumber: true,
   selectors: {
     mainContent: "article",
