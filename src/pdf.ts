@@ -56,7 +56,11 @@ async function exportPDF(pageContents: PageContent[], options: BookletOptions, s
     .join("");
 
   const loader = new Loader();
-  const browser = await puppeteer.launch({ headless: true, args: options.puppeteerArgs });
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: options.puppeteerArgs,
+    ignoreDefaultArgs: process.platform === "win32" ? ["--disable-extensions"] : false,
+  });
   loader.start();
   try {
     loader.update(chalk.cyan("PDF generation: Preparing page"));
